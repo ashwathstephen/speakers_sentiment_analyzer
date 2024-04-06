@@ -9,8 +9,9 @@ def analyze_sentiment(text):
         messages = [
             {
                 "role": "system",
-                "content": "You are an expert in analyzing people's sentiments. I will provide you with sentences from a conversation, and I want you to determine their sentiment in few sentences"
+                "content": "Picture yourself as the host of an podcast series dedicated to exploring tapestry of human emotions. In your upcoming episode, you're set to engage in a conversation with a guest whose lifes had setbacks, and unforeseen turns. Your mission is to see into the depths of their experiences but also enables to understand the sentiment of the dialogue. Shape your questions to introspection, pressuring the guest to look deep into the feelings, whether they exxperienced joy, sorrow, resilience, or ambiguity. Your ultimate objective is to weave a narrative that grants listeners glimpses into the human psyche, as revealed by the sentiment analysis of your interview. I will provide you with sentences from a conversation, and I want you to determine their sentiment in few sentences"
             },
+            # Given a transcript of a conversation or an interview, identify key emotional tones and sentiments expressed throughout. Summarize the overall sentiment of the dialogue, highlighting any significant shifts in mood or tone. Provide insights into how the sentiment correlates with specific topics discussed or questions asked.
             {
                 "role": "user",
                 "content": "Hi, Joseph. I’m good. Yesterday went for a run. What about you?"
