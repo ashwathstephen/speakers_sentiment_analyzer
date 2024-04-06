@@ -1,31 +1,16 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
+# Use the base image provided by AWS for Python 3.10
+FROM public.ecr.aws/lambda/python:3.10
 
-# Set the working directory in the container
-WORKDIR /app
+# Copy the function code and files
+COPY app.py ${LAMBDA_TASK_ROOT}
+COPY audio_2_text.py ${LAMBDA_TASK_ROOT}
+COPY senti_analysis.py ${LAMBDA_TASK_ROOT}
+COPY htmlTemplates.py ${LAMBDA_TASK_ROOT}
+COPY requirements.txt .
 
-# Install Git
-RUN apt-get update && \
-    apt-get install -y git && \
-    rm -rf /var/lib/apt/lists/*
+# Install the Python function dependencies using pip
+RUN python3.10 -m pip install -r requirements.txt
 
-# Clone your desired repository
-RUN git clone https://github.com/DhanushJain/speakers_sentiment_analyzer.git
-
-# Change the working directory to the cloned repository
-WORKDIR /app/speakers_sentiment_analyzer
-
-# Copy the requirements file into the container at /app
-COPY requirements.txt /app
-
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Expose port 8501 to the outside world
-EXPOSE 8501
-
-# Healthcheck for the container
-HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
-
-# Set the entry point for the container
-ENTRYPOINT ["streamlit", "run", "app.py"]
+# Set the CMD to the handler function
+# The file is named app.py and the function is named lambda_handler
+CMD ["app.lambda_handler"]
