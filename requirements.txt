@@ -3,3 +3,4 @@ openai==1.16.2
 python-dotenv==1.0.1
 streamlit==1.17.0
 streamlit_scrollable_textbox==0.0.3
+altair==4
